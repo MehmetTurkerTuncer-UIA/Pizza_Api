@@ -3,6 +3,8 @@
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
 const User = require("../models/user");
+const sendMail = require("../helpers/sendMail");
+
 module.exports = {
   list: async (req, res) => {
     /*
@@ -61,9 +63,13 @@ module.exports = {
       //   throw customError;
     }
     const data = await User.create(req.body);
+    
+    sendMail(data.email, "Welcome to Pizza API", "Hello, you have an account");
+
     res.status(201).send({
       error: false,
       data,
+
     });
   },
 

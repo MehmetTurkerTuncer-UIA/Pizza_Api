@@ -51,7 +51,7 @@ app.use(require("./src/middlewares/queryHandler"));
 // E_MAIL
 // npm i nodemailer 
 // ethereal.mail   fake mail service
-const nodemailer = require("nodemailer");
+//const nodemailer = require("nodemailer");
 
 // create test account
 
