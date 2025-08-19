@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     | FULLSTACK TEAM | NODEJS / EXPRESS |
 ------------------------------------------------------- */
@@ -10,69 +10,70 @@
     $ mkdir logs
     $ nodemon
 */
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
 /* ------------------------------------------------------- */
 // Required Modules:
 
 // envVariables to process.env:
-require('dotenv').config()
-const PORT = process.env?.PORT || 8000
+require("dotenv").config();
+const PORT = process.env?.PORT || 8000;
 
 // asyncErrors to errorHandler:
-require('express-async-errors')
+require("express-async-errors");
 
 /* ------------------------------------------------------- */
 // Configrations:
 
 // Connect to DB:
-const { dbConnection } = require('./src/configs/dbConnection')
-dbConnection()
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
 
 /* ------------------------------------------------------- */
 // Middlewares:
 
 // Accept JSON:
-app.use(express.json())
+app.use(express.json());
 
 // Logger:
-app.use(require('./src/middlewares/logger'))
+app.use(require("./src/middlewares/logger"));
 
 // Auhentication:
-// app.use(require('./src/middlewares/authentication'))
+app.use(require("./src/middlewares/authentication"));
 
 // findSearchSortPage / res.getModelList:
-app.use(require('./src/middlewares/queryHandler'))
+app.use(require("./src/middlewares/queryHandler"));
 
 /* ------------------------------------------------------- */
 // Routes:
 
 // routes/index.js:
-app.use('/', require('./src/routes/'))
+app.use("/", require("./src/routes/"));
 
 // HomePath:
-app.all('/', (req, res) => {
-    res.send({
-        error: false,
-        message: 'Welcome to PIZZA API',
-        docs: {
-            swagger: "/documents/swagger",
-            redoc: "/documents/redoc",
-            json: "/documents/json",
-        },
-        user: req.user,
-    })
-})
+app.all("/", (req, res) => {
+  res.send({
+    error: false,
+    message: "Welcome to PIZZA API",
+    docs: {
+      swagger: "/documents/swagger",
+      redoc: "/documents/redoc",
+      json: "/documents/json",
+    },
+    user: req.user,
+  });
+});
 
 /* ------------------------------------------------------- */
 
 // errorHandler:
-app.use(require('./src/middlewares/errorHandler'))
+app.use(require("./src/middlewares/errorHandler"));
 
 // RUN SERVER:
-app.listen(PORT, () => console.log('http://127.0.0.1:' + PORT))
+app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
 
 /* ------------------------------------------------------- */
 // Syncronization (must be in commentLine):
 // require('./src/helpers/sync')() // !!! It clear database.
+
