@@ -69,14 +69,14 @@ module.exports = {
 
     // expiresIn: "15m" - 15 minutes
 
-    const accessToken = req.app.jwt.sign(
+    const accessToken = jwt.sign(
       accessData,
       process.env.JWT_ACCESS_KEY,
       { expiresIn: "15m" }
     );
 
     // expiresIn: "30d" - 30 days
-    const refreshToken = req.app.jwt.sign(
+    const refreshToken = jwt.sign(
       refreshData,
       process.env.JWT_REFRESH_KEY,
       { expiresIn: "30d" }  )
@@ -84,6 +84,10 @@ module.exports = {
     res.send({
       error: false,
       token: tokenData.token,
+      bearer: {
+        access: accessToken,
+        refress: refreshToken
+      },
       user,
     });
   },
