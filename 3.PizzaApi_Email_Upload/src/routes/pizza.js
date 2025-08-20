@@ -4,10 +4,23 @@
 ------------------------------------------------------- */
 const router = require("express").Router();
 /* ------------------------------------------------------- */
-
 // UPLOAD
+const upload = require("../middlewares/upload");
+
+
+
 // npm i multer
 // https://expressjs.com/en/resources/middleware/multer.html
+
+/* ------------------------------------------------------- 
+
+ 
+//dosya yukleme form tipi olarak "multipart/form-data" kullanilmalidir
+//<form action="/pizzas" enctype="multipart/form-data" method="post">
+//  <input type="file" name="image" />
+//  <button type="submit">Upload</button>
+//</form>
+
 
 const multer = require("multer");
 const upload = multer({ 
@@ -25,7 +38,7 @@ const upload = multer({
   }); // Files will be saved in the '
 
 
-/* ------------------------------------------------------- */
+ ------------------------------------------------------- */
 // routes/pizza:
 
 const pizza = require("../controllers/pizza");

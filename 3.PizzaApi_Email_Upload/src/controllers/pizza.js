@@ -70,6 +70,15 @@ module.exports = {
             #swagger.tags = ["Pizzas"]
             #swagger.summary = "Update Pizza"
         */
+    //console.log('file',req.file); // For upload single file
+    //console.log('files', req.files);  // For upload multiple files  // egercoklu dosya eklmek istiyorsan modelde imagei array yapmak gerekir
+
+    if(req.file){
+      // If a file is uploaded, you can handle it here
+      //console.log('File uploaded:', req.file);
+      req.body.image = req.file.filename; // Save the filename to the database
+    }
+
 
     const data = await Pizza.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,

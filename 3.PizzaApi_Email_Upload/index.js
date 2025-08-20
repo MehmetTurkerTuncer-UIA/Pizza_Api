@@ -30,8 +30,11 @@ require("express-async-errors");
 const { dbConnection } = require("./src/configs/dbConnection");
 dbConnection();
 
+//UPLOAD
+
 /* ------------------------------------------------------- */
 // Middlewares:
+
 
 // Accept JSON:
 app.use(express.json());
@@ -139,6 +142,9 @@ transporter.sendMail({
 /* ------------------------------------------------------- */
 // Routes:
 
+// UPLOAD
+
+
 // routes/index.js:
 app.use("/", require("./src/routes/"));
 
@@ -155,6 +161,11 @@ app.all("/", (req, res) => {
     user: req.user,
   });
 });
+// Static Files:
+
+//app.use("/uploads", express.static("./uploads")); // For uploaded files
+app.use("/images", express.static("./uploads")); // For uploaded files
+
 
 /* ------------------------------------------------------- */
 
