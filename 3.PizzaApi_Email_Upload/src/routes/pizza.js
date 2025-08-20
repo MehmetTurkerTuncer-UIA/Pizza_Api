@@ -13,7 +13,14 @@ const multer = require("multer");
 const upload = multer({ 
     //dest: "./uploads/",  
     storage: multer.diskStorage({
-        destination: './uploads/', 
+        destination: './uploads/',
+        filename: (req, file, returnCallBack) => {
+          console.log('file',file);  
+          // file.fieldname: input name
+            // file.originalname: original file name
+            returnCallBack(null, 'mehmet.jpg');   // dosya isimlendirme 
+            //returnCallBack(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
+        }
     })
   }); // Files will be saved in the '
 
@@ -27,9 +34,9 @@ const pizza = require("../controllers/pizza");
 
 router.route("/")
   .get(pizza.list)
-  //.post(upload.single(image), pizza.create);
-  //.post(upload.array(image), pizza.create);
-  .post(upload.any(), pizza.create);
+  .post(upload.single("image"), pizza.create);
+  //.post(upload.array("image"), pizza.create);  // Burden fazla dosya icin
+  //.post(upload.any(), pizza.create);  // input name "image" kullanmadan dozya yukleme ama bu tavsiye edilmez
 
 router
   .route("/:id")
